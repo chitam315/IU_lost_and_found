@@ -5,7 +5,7 @@ const eprhbs = require('express-handlebars');
 const morgan = require('morgan');
 
 const router = require('./routes');
-const db = require('/Users/nguyenlechitam/workspace/nodeJS/src/config/db')
+const db = require('/Users/nguyenlechitam/workspace/Education_web/src/config/db')
 
 const app = express();
 const port = 3000;
