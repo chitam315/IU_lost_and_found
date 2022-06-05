@@ -1,7 +1,7 @@
-
 const express = require('express');
 const path = require('path');
 const eprhbs = require('express-handlebars');
+const methodOverride = require('method-override');
 const morgan = require('morgan');
 
 const router = require('./routes');
@@ -9,6 +9,9 @@ const db = require('/Users/nguyenlechitam/workspace/Education_web/src/config/db'
 
 const app = express();
 const port = 3000;
+
+ //override with POST having ?_method=PATCH
+ app.use(methodOverride('_method'))
 
 router(app);
 
@@ -30,9 +33,8 @@ app.engine('.hbs', engine({
     }
  }));
 
-app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, 'resources/views'));
-
+ app.set('view engine', '.hbs');
+ app.set('views', path.join(__dirname, 'resources/views'));
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

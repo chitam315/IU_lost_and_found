@@ -51,6 +51,34 @@ class CoursesController{
             })
             .catch(next)
     }
+
+    //[PUT] courses/:id
+    update(req,res,next){
+        var formBody = req.body
+        Courses.findById(req.params.id,(err,doc) => {
+            if (err) {
+                res.send('ERROR!!!')
+            } else {
+                doc.name = formBody.name;
+                doc.description = formBody.description;
+                doc.videoID = formBody.videoID;
+                doc.image = `https://i.ytimg.com/vi/${formBody.videoID}/hq720.jpg`
+                doc.save((err,doc) => {
+                    if(!err) res.redirect('/courses')
+                })
+            }
+        })
+    }
+
+    //[DELETE] courses/:id
+    delete(req,res,next){
+        Courses.deleteOne({ _id : req.params.id })
+            .then(() => {
+                res.redirect('back')
+            })
+            .catch(next)
+        
+    }
 }
 
 module.exports = new CoursesController

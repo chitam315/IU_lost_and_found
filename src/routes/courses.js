@@ -12,6 +12,10 @@ router.post('/store', urlencodedParser , coursesController.store)
 
 router.get('/create',coursesController.create)
 
+router.put('/:id' , urlencodedParser , coursesController.update)
+
+router.delete('/:id' , coursesController.delete)
+
 router.get('/:id/edit',coursesController.courseEdit)
 
 router.get('/:slug',coursesController.show)
