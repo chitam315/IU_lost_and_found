@@ -1,27 +1,21 @@
 <div class="mt-4 ml-3 mr-3">
-    <h3>Đăng khoá học</h3>
+    <h3>Create new course</h3>
 
     <form method="post" action="/courses/store">
         <div class="form-group">
-            <label for="name">Tên khoá học</label>
+            <label for="name">Course name</label>
             <input type="text" class="form-control" id="name" name="name">
         </div>
 
         <div class="form-group">
-            <label for="description">Mô tả khoá học</label>
+            <label for="description">Description</label>
             <input type="text" class="form-control" id="description" name="description">
         </div>
 
         <div class="form-group">
-            <label for="videoID">ID của video</label>
+            <label for="videoID">ID video</label>
             <input type="text" class="form-control" id="videoID" name="videoID">
         </div>
-
-        {{!-- <div class="form-group">
-            <label for="videoID">slug</label>
-            <input type="text" class="form-control" id="videoID" name="slug">
-        </div> --}}
-        
-        <input type="submit" value="Thêm khoá học">
+        <input type="submit" value="Create course">
     </form>
 </div>

@@ -12,6 +12,8 @@ router.post('/store', urlencodedParser , coursesController.store)
 
 router.get('/create',coursesController.create)
 
+router.get('/:id/edit',coursesController.courseEdit)
+
 router.get('/:slug',coursesController.show)
 
 router.get('/',coursesController.index)

@@ -40,6 +40,17 @@ class CoursesController{
             }
         });
     }
+
+    //[GET] courses/:id/edit
+    courseEdit(req,res,next){
+        Courses.findById(req.params.id)
+            .then(course => {
+                res.render('courses/edit',{
+                    course: mongooseHandler.mongooseToObject(course)
+                })
+            })
+            .catch(next)
+    }
 }
 
 module.exports = new CoursesController
