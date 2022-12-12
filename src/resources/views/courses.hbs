@@ -4,15 +4,15 @@
 		{{#each courses}}
 		<div class="col-sm-6 col-lg-4">
 			<div class="card card-course-item">
-				<a href="/courses/{{this.slug}}">
+				<a href="/post/{{this.slug}}">
 					<img src="{{this.image}}" alt="{{this.name}}" class="card-img-top">
 				</a>
 				<div class="card-body">
-					<a href="/courses/{{this.slug}}">
+					<a href="/post/{{this.slug}}">
 						<h5 class="card-title">{{this.name}}</h5>
 					</a>
-					<p class="card-text">{{this.description}}</p>
-					<a href="/courses/{{this.slug}}" class="btn btn-primary">Mua khoá học</a>
+					{{!-- <p class="card-text">{{this.description}}</p> --}}
+					<a href="/post/{{this.slug}}" class="btn btn-primary">View post</a>
 				</div>
 			</div>
 		</div>
@@ -20,3 +20,5 @@
 
 	</div>
 </div>
+
+<a style="margin: 50px 50px;" href="/post/create" class="btn btn-primary">CREATE YOUR POST</a>

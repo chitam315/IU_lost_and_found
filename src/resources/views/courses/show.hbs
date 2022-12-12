@@ -4,14 +4,15 @@
             <button>HỌC NGAY</button>
         </div>
         <div class="col-lg-9">
-            <h2>Xây dựng website với {{course.name}}</h2>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{course.videoID}}"
+            <h2>{{course.name}}</h2>
+            {{!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/{{course.videoID}}"
                 title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+                allowfullscreen></iframe> --}}
+            <img src="{{course.image}}" alt="{{course.name}}" class="card-img-top" style="width: 500px;">
             <p>{{course.description}}</p>
-            <a href="/courses/create">
-                <button>Create new course</button>
+            <a href="/post/create">
+                <button>Create new post</button>
             </a>
                 
         </div>

@@ -1,83 +1,87 @@
 const Courses = require('../model/Course')
 const mongooseHandler = require('../../util/mongoose')
 
-class CoursesController{
+class CoursesController {
     //[GET] /course/:slug
-    show(req,res,next){
-        Courses.findOne({slug : req.params.slug})
+    show(req, res, next) {
+        Courses.findOne({ slug: req.params.slug })
             .then((course) => {
-                res.render('courses/show',{
-                    course: mongooseHandler.mongooseToObject(course)
+                res.render('courses/show', {
+                    course: mongooseHandler.mongooseToObject(course),
+                    user: req.user,
                 })
             })
     }
 
     //[GET] /courses
-    index(req,res,next){
+    index(req, res, next) {
         Courses.find({})
             .then(courses => {
-                res.render('courses',{
-                    courses: mongooseHandler.multipleMongooseToObject(courses)
+                res.render('courses', {
+                    courses: mongooseHandler.multipleMongooseToObject(courses),
+                    user: req.user,
                 })
             })
             .catch(next)
     }
 
     //[GET] course/create
-    create(req,res,next){
-         res.render('courses/create')
+    create(req, res, next) {
+        res.render('courses/create', {
+            user: req.user,
+        })
     }
 
     //[POST] courses/store
-    store(req,res,next){
+    store(req, res, next) {
         var formBody = req.body
-        formBody.image = `https://i.ytimg.com/vi/${req.body.videoID}/hq720.jpg`
+        formBody.image = `${req.body.videoID}`
         const course = new Courses(formBody);
         course.save((err) => {
-            if(err) {console.log('LỖI R')}
-            else{
-                res.redirect('/courses')
+            if (err) { console.log('LỖI R') }
+            else {
+                res.redirect('/post')
             }
         });
     }
 
     //[GET] courses/:id/edit
-    courseEdit(req,res,next){
+    courseEdit(req, res, next) {
         Courses.findById(req.params.id)
             .then(course => {
-                res.render('courses/edit',{
-                    course: mongooseHandler.mongooseToObject(course)
+                res.render('courses/edit', {
+                    course: mongooseHandler.mongooseToObject(course),
+                    user: req.user,
                 })
             })
             .catch(next)
     }
 
     //[PUT] courses/:id
-    update(req,res,next){
+    update(req, res, next) {
         var formBody = req.body
-        Courses.findById(req.params.id,(err,doc) => {
+        Courses.findById(req.params.id, (err, doc) => {
             if (err) {
                 res.send('ERROR!!!')
             } else {
                 doc.name = formBody.name;
                 doc.description = formBody.description;
                 doc.videoID = formBody.videoID;
-                doc.image = `https://i.ytimg.com/vi/${formBody.videoID}/hq720.jpg`
-                doc.save((err,doc) => {
-                    if(!err) res.redirect('/courses')
+                doc.image = `${formBody.videoID}`
+                doc.save((err, doc) => {
+                    if (!err) res.redirect('/post')
                 })
             }
         })
     }
 
     //[DELETE] courses/:id
-    delete(req,res,next){
-        Courses.deleteOne({ _id : req.params.id })
+    delete(req, res, next) {
+        Courses.deleteOne({ _id: req.params.id })
             .then(() => {
-                res.redirect('back')
+                res.redirect('/me/stored/post')
             })
             .catch(next)
-        
     }
 }
 

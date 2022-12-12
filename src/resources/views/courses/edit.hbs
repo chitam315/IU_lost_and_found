@@ -2,9 +2,9 @@
     <h3>Update course</h3>
 
     {{#with course}}
-    <form method="POST" action="/courses/{{_id}}?_method=PUT">
+    <form method="POST" action="/post/{{_id}}?_method=PUT">
         <div class="form-group">
-            <label for="name">Course name</label>
+            <label for="name">Post title</label>
             <input type="text" class="form-control" id="name" name="name" value="{{name}}">
         </div>
 
@@ -14,7 +14,7 @@
         </div>
 
         <div class="form-group">
-            <label for="videoID">ID video</label>
+            <label for="videoID">Image link</label>
             <input type="text" class="form-control" id="videoID" name="videoID" value="{{videoID}}">
         </div>
         <button type="submit" class="btn btn-primary">Save</button>

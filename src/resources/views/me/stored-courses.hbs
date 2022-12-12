@@ -18,8 +18,8 @@
                 <td>{{this.createdAt}}</td>
                 <td>{{this.description}}</td>
                 <td>
-                    <a href="/courses/{{this._id}}/edit" class="btn btn-info">Update</a>
-                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteCourseModal"
+                    <a href="/post/{{this._id}}/edit" class="btn btn-info">Update</a>
+                    <a href="/post/delete" class="btn btn-danger" data-toggle="modal" data-target="#deleteCourseModal"
                         data-id={{_id}}>
                         Delete
                     </a>
@@ -41,7 +41,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure delete this course !!!!
+                Are you sure delete this post !!!!
             </div>
             <div class="modal-footer">
                 <button id="btnDeleteCourse" type="button" class="btn btn-danger">Delete</button>
@@ -52,6 +52,8 @@
 </div>
 
 <form method="POST" id="form-delete-course"></form>
+
+<script src="javascript/validateForm.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function(){
@@ -65,7 +67,7 @@
         })
             var btnDeleteCourse = document.getElementById('btnDeleteCourse');
             btnDeleteCourse.onclick = () => {
-                formDelete.action = '/courses/' + courseID + '?_method=DELETE'
+                formDelete.action = '/post/' + courseID + '?_method=DELETE'
                 formDelete.submit();
             }
     })
