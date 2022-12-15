@@ -16,6 +16,7 @@ const getCookies = async (req, res, next) => {
         var result = jwt.verify(req.cookies.token, 'password')
         console.log(result);
         let acc = await Accounts.findOne({ _id: result._id });
+        console.log(acc);
         req.user = acc
         next()
     } catch (error) {
