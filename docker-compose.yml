@@ -22,6 +22,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: user_password
     volumes:
       - .docker/db:/data/db
+    ports:
+      - 27017:27017
     restart: always
     networks:
       - db-net
