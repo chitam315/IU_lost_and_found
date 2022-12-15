@@ -14,12 +14,16 @@ class CoursesController {
     }
 
     //[GET] /courses
-    index(req, res, next) {
-        Courses.find({})
+    index(req,res,next){
+        Courses.find({
+            name: {$regex : req.query.keyword || ''},
+            ...(req.query.tag && req.query.tag !== 'None' ? {
+                tag: req.query.tag,
+            } : {})
+        })
             .then(courses => {
-                res.render('courses', {
-                    courses: mongooseHandler.multipleMongooseToObject(courses),
-                    user: req.user,
+                res.render('courses',{
+                    courses: mongooseHandler.multipleMongooseToObject(courses)
                 })
             })
             .catch(next)
@@ -33,14 +37,13 @@ class CoursesController {
     }
 
     //[POST] courses/store
-    store(req, res, next) {
-        var formBody = req.body
-        formBody.image = `${req.body.videoID}`
-        const course = new Courses(formBody);
+    store(req,res,next){
+        req.body.image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Googleplex_HQ_%28cropped%29.jpg/1024px-Googleplex_HQ_%28cropped%29.jpg'
+        const course = new Courses(req.body);
         course.save((err) => {
-            if (err) { console.log('LỖI R') }
-            else {
-                res.redirect('/post')
+            if(err) {console.log('LỖI R')}
+            else{
+                res.redirect('/courses')
             }
         });
     }
@@ -58,18 +61,19 @@ class CoursesController {
     }
 
     //[PUT] courses/:id
-    update(req, res, next) {
-        var formBody = req.body
-        Courses.findById(req.params.id, (err, doc) => {
+    update(req,res,next){
+        Courses.findById(req.params.id,(err,doc) => {
             if (err) {
                 res.send('ERROR!!!')
             } else {
-                doc.name = formBody.name;
-                doc.description = formBody.description;
-                doc.videoID = formBody.videoID;
-                doc.image = `${formBody.videoID}`
-                doc.save((err, doc) => {
-                    if (!err) res.redirect('/post')
+                doc.name = req.body.name;
+                doc.description = req.body.description;
+                doc.messenger = req.body.messenger
+                doc.tag = req.body.tag
+                doc.image = req.body.image
+
+                doc.save((err,doc) => {
+                    if(!err) res.redirect('/courses')
                 })
             }
         })
