@@ -16,7 +16,6 @@ const getCookies = async (req, res, next) => {
         req.user = acc
         next()
     } catch (error) {
-        console.log(error);
         next()
     }
 }

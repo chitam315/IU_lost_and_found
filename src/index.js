@@ -6,7 +6,7 @@ const morgan = require('morgan');
 var cookieParser = require('cookie-parser')
 
 const router = require('./routes');
-const db = require('/Users/nguyenlechitam/workspace/Education_web/src/config/db')
+const db = require('./config/db')
 
 const app = express();
 const port = 3000;
